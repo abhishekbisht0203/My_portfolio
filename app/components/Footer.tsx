@@ -62,6 +62,8 @@ export default function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={link.name}
+                  title={link.name}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <link.icon size={24} />

@@ -108,7 +108,7 @@ export default function Resume() {
                 </p>
               </div>
               
-              <div className="relative w-full" style={{ height: '800px' }}>
+              <div className="relative w-full h-[800px]">
                 <iframe
                   src="/resume/ABHISHEK_BISHT .pdf"
                   className="w-full h-full border-0"
