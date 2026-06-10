@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Globe } from 'lucide-react';
 import Link from 'next/link';
 
 const socialLinks = [
+  { name: 'Website', icon: Globe, url: 'https://abhishekbisht.vercel.app/' },
   { name: 'GitHub', icon: Github, url: 'https://github.com/abhishekbisht0203' },
   { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/abhishek-bisht-876541308/' },
   { name: 'Email', icon: Mail, url: 'mailto:abhiyanshbisht@gmail.com' },
