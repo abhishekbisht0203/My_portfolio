@@ -8,67 +8,37 @@ const skills = [
     category: 'Frontend',
     icon: Code,
     color: 'from-orange-500 to-amber-400',
-    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']
+    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML', 'CSS', 'JavaScript']
   },
   {
     category: 'Backend',
     icon: Database,
     color: 'from-amber-600 to-orange-500',
-    technologies: ['Node.js', 'Express', 'Python', 'Serverless Function', 'Rest APIs']
+    technologies: ['Node.js', 'Express.js', 'Django REST Framework', 'FastAPI', 'REST APIs']
   },
   {
-    category: 'Embedded Systems',
+    category: 'Databases',
     icon: CircuitBoard,
     color: 'from-amber-500 to-orange-400',
-    technologies: ['C',
-      'Assembly',
-      'MSPM0 Microcontrollers',
-      'Finite State Machines',
-      'PCB Design (KiCad)',
-      'Real-Time Systems',
-      'UART / GPIO',]
+    technologies: ['MongoDB', 'PostgreSQL']
   },
   {
-    category: 'ML / AI',
-    icon: Brain,
-    color: 'from-orange-600 to-amber-500',
-    technologies: ['Python',
-      'Pandas',
-      'NumPy',
-      'Matplotlib',
-      'Stable-Baselines3',
-      'MuJoCo',
-      'Reinforcement Learning',
-      'Algorithm Tuning (PPO, ETPPO)',]
-  },
-  {
-    category: 'Tools',
+    category: 'Tools & Tech',
     icon: GitBranch,
     color: 'from-orange-400 to-amber-500',
-    technologies: [
-      'Git',
-      'GitHub',
-      'VS Code',
-      'Docker',
-      'Vercel',
-      'CI/CD',
-      'Linux CLI',
-      'Figma']
+    technologies: ['Git', 'WebSockets', 'Razorpay', 'Cloudinary', 'CI/CD', 'REST APIs']
+  },
+  {
+    category: 'Core Concepts',
+    icon: Brain,
+    color: 'from-orange-600 to-amber-500',
+    technologies: ['Authentication', 'Role-Based Access Control', 'API Optimization', 'System Design']
   },
   {
     category: 'Soft Skills',
     icon: MicVocal,
     color: 'from-amber-500 to-orange-600',
-    technologies: [
-      'Leadership',
-      'Team Collaboration',
-      'Public Speaking',
-      'Project Management',
-      'Problem Solving',
-      'Adaptability',
-      'Mentorship',
-      'Strategic Thinking',
-    ]
+    technologies: ['Collaboration', 'Problem Solving', 'Communication', 'Product Thinking']
   }
 ];
 

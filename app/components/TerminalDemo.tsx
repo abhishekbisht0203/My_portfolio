@@ -14,16 +14,16 @@ interface Job {
 
 const INITIAL_FS: FileSystem = {
   'home': {
-    'carlos': {
+    'abhishek': {
       'projects': {
         'yash': {
           'yash.c': '/* yash - Yet Another Shell */\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n...',
           'Makefile': 'yash : yash.c\n\tgcc yash.c -o yash -lreadline\n\nclean :\n\trm yash',
           'README.md': '# Yash - Yet Another Shell\nA custom Unix shell with pipes, redirection, and job control.',
         },
-        'portfolio': {
-          'package.json': '{ "name": "carlos-portfolio", "version": "1.0.0" }',
-          'README.md': '# Carlos Portfolio\nBuilt with Next.js and Tailwind CSS.',
+          'portfolio': {
+          'package.json': '{ "name": "abhishek-portfolio", "version": "1.0.0" }',
+          'README.md': '# Abhishek Portfolio\nBuilt with Next.js and Tailwind CSS.',
         },
       },
       'notes.txt': 'Remember to push yash updates.\nAlso fix the pipe edge case.',
@@ -95,7 +95,7 @@ export default function TerminalDemo() {
     '',
   ]);
   const [input, setInput] = useState('');
-  const [cwd, setCwd] = useState('/home/carlos/projects/yash');
+  const [cwd, setCwd] = useState('/home/abhishek/projects/yash');
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -119,9 +119,9 @@ export default function TerminalDemo() {
   }, []);
 
   const getPrompt = () => {
-    const home = '/home/carlos';
+    const home = '/home/abhishek';
     const display = cwd.startsWith(home) ? '~' + cwd.slice(home.length) : cwd;
-    return `carlos@yash:${display}$ `;
+    return `abhishek@yash:${display}$ `;
   };
 
   const processCommand = (rawInput: string) => {
@@ -230,7 +230,7 @@ export default function TerminalDemo() {
 
       case 'cd': {
         if (!args[0] || args[0] === '~') {
-          setCwd('/home/carlos');
+          setCwd('/home/abhishek');
           return [];
         }
         const target = resolvePath(currentCwd, args[0]);
@@ -255,7 +255,7 @@ export default function TerminalDemo() {
         return [currentCwd];
 
       case 'whoami':
-        return ['carlos'];
+        return ['abhishek'];
 
       case 'date':
         return [new Date().toString()];

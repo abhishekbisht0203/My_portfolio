@@ -25,8 +25,7 @@ export default function About() {
             About Me
           </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I&apos;m a passionate full-stack developer and aspiring software engineer focused on
-             building scalable, user-centric applications and leveraging modern technologies to solve real-world problems.
+            Software Engineer with strong expertise in MERN, Next.js, FastAPI, and Django REST Framework, focused on building scalable, production-ready applications. Proven ability to design high-performance APIs, optimize backend systems, and deliver responsive UI/UX.
           </p>
         </motion.div>
 
@@ -40,8 +39,8 @@ export default function About() {
             <div className="relative">
               <div className="aspect-square bg-gradient-to-br from-orange-500 to-amber-400 rounded-2xl overflow-hidden">
                 <Image
-                  src="/Carlos_image.jpeg" 
-                  alt="Carlos Rojas"
+                  src="/Carlos_image.jpeg"
+                  alt="Abhishek Bisht"
                   fill
                   className="object-cover"
                 />
@@ -57,14 +56,11 @@ export default function About() {
             className="space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 My Journey
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Growing up in Laredo, Texas, my passion for technology began through
-                 high school robotics, where I learned to solve complex problems with limited resources and collaborate under pressure.
-                  Those early experiences sparked a curiosity that led me to pursue Electrical and Computer Engineering at UT Austin,
-                   where I&apos;ve spent the past several years building skills across full-stack development, embedded systems, and machine learning.
+                Pursuing a Master of Computer Applications (MCA) at Amity University. I have built production-ready full-stack applications, designed scalable APIs, and delivered real-time systems and role-based dashboards that improved operational efficiency.
               </p>
             </div>
 

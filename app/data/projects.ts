@@ -11,6 +11,22 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 101,
+    title: "ChatClassRoom – Virtual Learning Platform",
+    description: "A real-time collaborative e-learning platform for students and teachers built with Django REST Framework, WebSockets, and React. Includes Google & GitHub OAuth and PWA support.",
+    image: "/file.svg",
+    tags: ["Django REST", "React", "WebSockets", "PWA"],
+    liveUrl: "https://chatclassroom.onrender.com/",
+  },
+  {
+    id: 102,
+    title: "E-Commerce Platform",
+    description: "Full-stack e-commerce platform with product catalog, authentication, cart, and Stripe payment integration.",
+    image: "/file.svg",
+    tags: ["Django", "React", "Stripe", "REST APIs"],
+    liveUrl: "https://abhishek9590.pythonanywhere.com/",
+  },
+  {
     id: 1,
     title: "FormCoach",
     description: "A real-time AI-powered vertical jump form analyzer that runs entirely in the browser. Uses MediaPipe Pose estimation to detect body landmarks, automatically segment jump phases via a state machine, compute biomechanical metrics (knee/hip angles, trunk lean, valgus deviation, arm swing timing, jump height), and deliver personalized coaching feedback with actionable drills. Supports standing and approach vertical jumps, includes skeleton-overlay replay with phase markers, and persists rep history locally — all client-side with zero data leaving your device.",

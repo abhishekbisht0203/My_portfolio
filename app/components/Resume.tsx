@@ -9,8 +9,8 @@ export default function Resume() {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Andre_Silva_Resume.pdf';
+    link.href = '/resume/ABHISHEK_BISHT .pdf';
+    link.download = 'Abhishek_Bisht_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -52,11 +52,11 @@ export default function Resume() {
                 <div className="flex items-center justify-center sm:justify-start mb-3">
                   <FileText className="w-8 h-8 text-orange-500 dark:text-amber-400 mr-3" />
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Carlos Rojas - Resume
+                    Abhishek Bisht - Resume
                   </h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Electrical and Computer Engineering • The University of Texas at Austin
+                  Software Engineer — MERN, Next.js, FastAPI, Django REST Framework
                 </p>
               </div>
               
@@ -78,7 +78,7 @@ export default function Resume() {
                 </button>
                 
                 <a
-                  href="/resume.pdf"
+                  href="/resume/ABHISHEK_BISHT .pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center px-6 py-3 bg-stone-700 text-white rounded-lg font-semibold hover:bg-stone-600 transition-all duration-200 transform hover:scale-105"
@@ -110,7 +110,7 @@ export default function Resume() {
               
               <div className="relative w-full" style={{ height: '800px' }}>
                 <iframe
-                  src="/resume.pdf"
+                  src="/resume/ABHISHEK_BISHT .pdf"
                   className="w-full h-full border-0"
                   title="Resume Preview"
                 />

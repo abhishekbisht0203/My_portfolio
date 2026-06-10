@@ -5,10 +5,9 @@ import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 const socialLinks = [
-  { name: 'GitHub', icon: Github, url: 'https://github.com/carlosdrojas' },
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/carlosdrojas' },
-  { name: 'Twitter', icon: Twitter, url: 'https://x.com/carlosroja5_' },
-  { name: 'Email', icon: Mail, url: 'mailto:rojasdamiancarlos@gmail.com' },
+  { name: 'GitHub', icon: Github, url: 'https://github.com/abhishekbisht0203' },
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/abhishek-bisht-876541308/' },
+  { name: 'Email', icon: Mail, url: 'mailto:abhiyanshbisht@gmail.com' },
 ];
 
 export default function Footer() {
@@ -22,9 +21,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Carlos Rojas</h3>
+            <h3 className="text-xl font-bold mb-4">Abhishek Bisht</h3>
             <p className="text-gray-400">
-              Full-stack developer passionate about creating amazing web experiences.
+              Software Engineer focused on building scalable, production-ready applications.
             </p>
           </div>
           
@@ -74,7 +73,7 @@ export default function Footer() {
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} Carlos Rojas. All rights reserved.
+            © {new Date().getFullYear()} Abhishek Bisht. All rights reserved.
           </p>
         </div>
       </div>

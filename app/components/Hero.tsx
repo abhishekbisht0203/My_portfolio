@@ -12,7 +12,7 @@ const images = [
   { id: 4, img: "/CarlosRojasHeadshot_justhead.png" }
 ];
 
-const roles = ['Full-stack developer', 'Systems programmer', 'ML engineer'];
+const roles = ['Software Engineer', 'Full Stack Developer', 'MERN • Next.js • FastAPI'];
 
 const COLORS = ['#fbbf24', '#fb923c', '#f97316', '#fde68a', '#fdba74'];
 
@@ -119,7 +119,7 @@ export default function Hero() {
           >
             Hey there, I&apos;m{' '}
             <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
-              Carlos Rojas
+              Abhishek Bisht
             </span>
           </motion.h1>
 
@@ -133,7 +133,7 @@ export default function Hero() {
               {displayed}
               <span className="cursor-blink ml-0.5">|</span>
             </span>
-            {' '}passionate about building scalable applications and applying machine learning to real-world problems.
+            {' '}Software Engineer with strong expertise in MERN, Next.js, FastAPI, and Django REST Framework, focused on building scalable, production-ready applications.
           </motion.p>
           
           <motion.div

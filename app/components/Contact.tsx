@@ -8,19 +8,19 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'rojasdamiancarlos@gmail.com',
-    href: 'mailto:rojasdamiancarlos@gmail.com'
+    value: 'abhiyanshbisht@gmail.com',
+    href: 'mailto:abhiyanshbisht@gmail.com'
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+1 (956) 326-0367',
-    href: 'tel:+19563260367'
+    value: '+91 74568 49590',
+    href: 'tel:+917456849590'
   },
   {
     icon: MapPin,
     label: 'Location',
-    value: 'Austin, TX',
+    value: 'Nainital, Uttarakhand, India',
     href: '#'
   }
 ];
@@ -42,7 +42,7 @@ export default function Contact() {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    const mailtoLink = `mailto:rojasdamiancarlos@gmail.com?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:abhiyanshbisht@gmail.com?subject=${subject}&body=${body}`;
     
     // Open email client
     window.location.href = mailtoLink;
