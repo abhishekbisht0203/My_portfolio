@@ -1,3 +1,5 @@
+ 'use client';
+
 import { motion, useMotionValue, useTransform } from 'motion/react';
 import { useState } from 'react';
 
@@ -97,7 +99,11 @@ export default function Stack({
       }}
     >
       {cards.map((card, index) => {
-        const randomRotate = randomRotation ? Math.random() * 10 - 5 : 0;
+        function seededRandom(seed: number) {
+          const x = Math.sin(seed) * 10000;
+          return x - Math.floor(x);
+        }
+        const randomRotate = randomRotation ? seededRandom(card.id) * 10 - 5 : 0;
 
         return (
           <CardRotate key={card.id} onSendToBack={() => sendToBack(card.id)} sensitivity={sensitivity}>

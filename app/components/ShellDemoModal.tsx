@@ -51,9 +51,11 @@ export default function ShellDemoModal({ isOpen, onClose }: ShellDemoModalProps)
             {/* Title bar */}
             <div className="flex items-center justify-between px-4 py-2 bg-[#24283b] border-b border-[#1a1b26]">
               <div className="flex items-center gap-2">
-                <div className="flex gap-1.5">
+                  <div className="flex gap-1.5">
                   <button
                     onClick={onClose}
+                    aria-label="Close"
+                    title="Close"
                     className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"
                   />
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
@@ -65,6 +67,8 @@ export default function ShellDemoModal({ isOpen, onClose }: ShellDemoModalProps)
               </div>
               <button
                 onClick={onClose}
+                aria-label="Close modal"
+                title="Close modal"
                 className="text-gray-500 hover:text-gray-300 transition-colors"
               >
                 <X size={16} />

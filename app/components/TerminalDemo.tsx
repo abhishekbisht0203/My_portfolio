@@ -470,6 +470,7 @@ export default function TerminalDemo() {
         <input
           ref={inputRef}
           type="text"
+          aria-label="Terminal command input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}

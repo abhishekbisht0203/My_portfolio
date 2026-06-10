@@ -166,6 +166,8 @@ export default function Hero() {
         >
           <button
             onClick={() => scrollToSection('#about')}
+            aria-label="Scroll to about"
+            title="Scroll to About section"
             className="animate-bounce"
           >
             <ChevronDown className="w-8 h-8 text-gray-600 dark:text-gray-400" />
