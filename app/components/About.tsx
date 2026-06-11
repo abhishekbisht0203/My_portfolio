@@ -39,7 +39,7 @@ export default function About() {
             <div className="relative">
               <div className="aspect-square bg-gradient-to-br from-orange-500 to-amber-400 rounded-2xl overflow-hidden">
                 <Image
-                  src="/Carlos_image.jpeg"
+                  src="/images/Abhishek Bisht.JPG"
                   alt="Abhishek Bisht"
                   fill
                   className="object-cover"

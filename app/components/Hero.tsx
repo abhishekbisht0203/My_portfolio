@@ -6,10 +6,12 @@ import { ChevronDown } from 'lucide-react';
 import Stack from './Stack'
 
 const images = [
-  { id: 1, img: "/stack-pic-3.jpg" },
-  { id: 2, img: "/stack-pic-4.jpg" },
-  { id: 3, img: "/stack-pic-2.jpeg" },
-  { id: 4, img: "/CarlosRojasHeadshot_justhead.png" }
+  { id: 1, img: "/images/WhatsApp Image 2026-06-11 at 12.08.42 PM (1).jpeg" },
+  { id: 2, img: "/images/WhatsApp Image 2026-06-11 at 1.32.53 PM.jpeg" },
+  { id: 3, img: "/images/stack-pic-4.jpg" },
+  { id: 4, img: "/images/TrafficFSM.jpg" },
+  { id: 5, img: "/images/Abhishek 2.jpeg" },
+  { id: 6, img: "/images/Abhishek Bisht.JPG" }
 ];
 
 const roles = ['Software Engineer', 'Full Stack Developer', 'MERN • Next.js • FastAPI'];

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { ExternalLink, Github, Terminal } from 'lucide-react';
 import { projects } from '../data/projects';
 import ShellDemoModal from './ShellDemoModal';
@@ -44,14 +43,6 @@ export default function Projects() {
               }}
             >
               <div className="spotlight" />
-              <div className="relative h-48 bg-gradient-to-br from-orange-500 to-amber-400">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
 
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
