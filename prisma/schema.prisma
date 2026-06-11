@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum MeetingProvider {
+  MANUAL
+  GOOGLE_MEET
+  GOOGLE_CALENDAR
+  CALENDLY
+  CAL_COM
+  ZOOM
+}
+
+model Appointment {
+  id              String            @id @default(cuid())
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  purpose         String
+  message         String            @db.Text
+  preferredDate   String
+  preferredTime   String
+  timezone        String
+  status          AppointmentStatus @default(PENDING)
+  meetingProvider MeetingProvider   @default(MANUAL)
+  meetingUrl      String?
+  externalEventId String?
+  calendarEventId String?
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([email])
+  @@index([status])
+}
