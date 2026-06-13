@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum AppointmentStatus {
@@ -19,9 +20,25 @@ enum MeetingProvider {
   MANUAL
   GOOGLE_MEET
   GOOGLE_CALENDAR
-  CALENDLY
+  CALANDLY
   CAL_COM
   ZOOM
+}
+
+enum AIProvider {
+  OPENAI
+  ANTHROPIC
+  GOOGLE
+  GROQ
+  OPENROUTER
+}
+
+enum AIMode {
+  GENERAL
+  PORTFOLIO
+  CODING
+  PROJECT_ADVISOR
+  CAREER_MENTOR
 }
 
 model Appointment {
@@ -40,10 +57,52 @@ model Appointment {
   meetingUrl      String?
   externalEventId String?
   calendarEventId String?
-  
+
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
 
   @@index([email])
   @@index([status])
+}
+
+model UserConversation {
+  id           String   @id @default(cuid())
+  title        String
+  userId       String?  // For future user authentication
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  isArchived   Boolean  @default(false)
+
+  messages     Message[] @relation("ConversationMessages")
+
+  @@index([updatedAt])
+  @@index([userId])
+}
+
+model Message {
+  id           String   @id @default(cuid())
+  conversationId String
+  conversation  UserConversation @relation("ConversationMessages", fields: [conversationId], references: [id])
+  role         String   // 'user' or 'assistant'
+  content      String   @db.Text
+  aiMode       AIMode   @default(GENERAL)
+  aiProvider   AIProvider @default(OPENAI)
+  tokensUsed   Int?     // Number of tokens used for this message
+  createdAt    DateTime @default(now())
+
+  @@index([conversationId])
+  @@index([createdAt])
+}
+
+model AIUsageStats {
+  id            String   @id @default(cuid())
+  date          DateTime @default(now())
+  provider      AIProvider
+  mode          AIMode
+  totalTokens   Int
+  totalRequests Int
+  errorCount    Int
+
+  @@index([date, provider])
+  @@index([date, mode])
 }

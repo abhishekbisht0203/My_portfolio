@@ -48,7 +48,7 @@ export const projects: Project[] = [
     description: "An Electron desktop app for batch-applying metadata to music files. Converts MP3, WAV, and FLAC to M4A, embeds cover art, and auto-numbers tracks via OCR or text input with fuzzy filename matching.",
     image: "/images/WhatsApp Image 2026-06-11 at 12.08.42 PM (1).jpeg",
     tags: ["Electron", "Node.js", "JavaScript"],
-    githubUrl: "https://github.com/carlosdrojas/MetaEditor",
+    githubUrl: "#",
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     description: "An interactive pathfinding visualizer built with Next.js and React, showcasing BFS and DFS algorithms in real time on a dynamic grid.",
     image: "/images/TrafficFSM.jpg",
     tags: ["Next.js", "Node.js", "React", "CSS"],
-    githubUrl: "https://github.com/carlosdrojas/AlgoVisualizer",
+    githubUrl: "#",
     liveUrl: "https://algo-visualizer-sand.vercel.app/",
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     description: "A modern, animated portfolio built with Next.js, Tailwind CSS, and Framer Motion to highlight projects and skills with smooth UI/UX.",
     image: "/Port.jpg",
     tags: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
-    githubUrl: "https://github.com/carlosdrojas/Carlos-Portfolio",
+    githubUrl: "#",
     liveUrl: "https://carlos-portfolio-beta.vercel.app/"
   },
   {
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     description: "A 48-hour hackathon action-adventure RPG where players explore a dynamic map and battle enemies, built with Python and Pygame.",
     image: "/RowdyPark.jpg",
     tags: ["Python", "Pygame"],
-    githubUrl: "https://github.com/emig23/dino-game",
+    githubUrl: "#",
     // liveUrl: "https://weather-dashboard-demo.vercel.app"
   },
   {

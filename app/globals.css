@@ -66,3 +66,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Typing indicator dots */
+@keyframes blink-dot {
+  0% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+  100% { opacity: 0.25; transform: translateY(0); }
+}
+
+.typing-indicator { display: inline-flex; gap: 6px; align-items: center; }
+.typing-indicator .dot { width: 7px; height: 7px; border-radius: 9999px; opacity: 0.25; }
+.typing-indicator .dot:nth-child(1) { animation: blink-dot 0.9s infinite; animation-delay: 0s; }
+.typing-indicator .dot:nth-child(2) { animation: blink-dot 0.9s infinite; animation-delay: 0.12s; }
+.typing-indicator .dot:nth-child(3) { animation: blink-dot 0.9s infinite; animation-delay: 0.24s; }
+
+.avatar-gradient {
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Theme classes for manual toggle */
+.theme-dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+.theme-light {
+  --background: #fffbeb;
+  --foreground: #171717;
+}

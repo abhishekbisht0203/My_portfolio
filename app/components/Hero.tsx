@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Stack from './Stack'
+import { AiAssistant } from '@/app/components/ai-section/AiAssistant';
 
 const images = [
   { id: 1, img: "/images/WhatsApp Image 2026-06-11 at 12.08.42 PM (1).jpeg" },
   { id: 2, img: "/images/WhatsApp Image 2026-06-11 at 1.32.53 PM.jpeg" },
   { id: 3, img: "/images/stack-pic-4.jpg" },
   { id: 4, img: "/images/TrafficFSM.jpg" },
-  { id: 5, img: "/images/Abhishek 2.jpeg" },
+  { id: 5, img: "/images/Abhi.jpeg" },
   { id: 6, img: "/images/Abhishek Bisht.JPG" }
 ];
 
@@ -34,6 +35,7 @@ function makeParticles() {
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [isAiSectionOpen, setIsAiSectionOpen] = useState(false);
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
   const [particles, setParticles] = useState<ReturnType<typeof makeParticles>>([]);
@@ -157,6 +159,12 @@ export default function Hero() {
             >
               Get In Touch
             </button>
+            <button
+              onClick={() => setIsAiSectionOpen(true)}
+              className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 transform hover:scale-105"
+            >
+              Chat with assistant
+            </button>
           </motion.div>
         </motion.div>
         
@@ -176,6 +184,7 @@ export default function Hero() {
           </button>
         </motion.div>
       </div>
+      <AiAssistant isOpen={isAiSectionOpen} onClose={() => setIsAiSectionOpen(false)} />
     </section>
   );
 }
