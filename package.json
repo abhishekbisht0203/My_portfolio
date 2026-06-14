@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.70",
-    "@anthropic-ai/sdk": "latest",
+    "@anthropic-ai/sdk": "^0.104.1",
     "@google/generative-ai": "^0.13.0",
     "@hookform/resolvers": "^5.4.0",
     "@prisma/client": "^5.22.0",
@@ -34,7 +34,7 @@
     "remark-gfm": "^4.0.1",
     "sharp": "^0.34.3",
     "twilio": "^6.0.2",
-    "zod": "^4.4.3"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

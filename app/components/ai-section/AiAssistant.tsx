@@ -67,16 +67,8 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
     }
   }, [isOpen]);
 
-  // Scroll section into view when it opens
-  useEffect(() => {
-    if (isOpen) {
-      // Wait for animation to complete before scrolling
-      const timer = setTimeout(() => {
-        chatContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
+  // NOTE: intentionally no scrollIntoView here — the hero section should not
+  // re-position itself when the chat opens. The chat overlays in-place.
 
   // Compute overlay position so it doesn't overlap the hero buttons
   useLayoutEffect(() => {

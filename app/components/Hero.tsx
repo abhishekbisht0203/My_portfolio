@@ -70,34 +70,37 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="aurora-bg absolute inset-0" />
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            backgroundColor: p.color,
-            boxShadow: `0 0 ${p.size * 3}px ${p.size}px ${p.color}`,
-            opacity: 0.7,
-          }}
-          animate={{
-            x: [0, p.driftX, 0, -p.driftX, 0],
-            y: [0, p.driftY, -p.driftY, p.driftY * 0.5, 0],
-            opacity: [0.7, 1, 0.5, 0.9, 0.7],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
+    <section id="home" className="min-h-screen flex items-center justify-center relative">
+      {/* Inner container clips background effects but lets the chat dropdown overflow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="aurora-bg absolute inset-0" />
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute rounded-full"
+            style={{
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              width: p.size,
+              height: p.size,
+              backgroundColor: p.color,
+              boxShadow: `0 0 ${p.size * 3}px ${p.size}px ${p.color}`,
+              opacity: 0.7,
+            }}
+            animate={{
+              x: [0, p.driftX, 0, -p.driftX, 0],
+              y: [0, p.driftY, -p.driftY, p.driftY * 0.5, 0],
+              opacity: [0.7, 1, 0.5, 0.9, 0.7],
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -122,7 +125,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            Hey there, I&apos;m{' '}
+            Hey there, I'm{' '}
             <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
               Abhishek Bisht
             </span>
@@ -189,5 +192,3 @@ export default function Hero() {
     </section>
   );
 }
-
-// add buttonsRef at top of component
