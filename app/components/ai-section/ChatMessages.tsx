@@ -1,7 +1,6 @@
 'use client';
 
 import { RefObject, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { Message } from '@prisma/client';
 import { Markdown } from '@/app/components/ai-chat/Markdown';
 
@@ -32,18 +31,13 @@ export function ChatMessages({ messages, isLoading, containerRef }: ChatMessages
       className="h-full overflow-y-auto overscroll-contain p-5 pr-3 space-y-4
                  bg-white/10 dark:bg-slate-900/10 backdrop-blur"
     >
-      {messages.map((message, index) => (
+      {messages.map((message) => (
         <div
           key={message.id}
           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}
                      w-full`}
-          style={{ animationDelay: `${index * 0.05}s` }}
         >
-          <motion.div
-            key={message.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          <div
             className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div className={`flex items-end ${message.role === 'assistant' ? '' : 'flex-row-reverse'} gap-3`}>
@@ -68,7 +62,7 @@ export function ChatMessages({ messages, isLoading, containerRef }: ChatMessages
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       ))}
 
@@ -84,11 +78,7 @@ export function ChatMessages({ messages, isLoading, containerRef }: ChatMessages
       {/* Loading indicator at the bottom when waiting for response */}
       {isLoading && messages.length > 0 && (
         <div ref={messagesEndRef} className="flex items-center justify-center py-6">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center space-x-3"
-          >
+          <div className="flex items-center space-x-3">
             <div className="w-8 h-8 rounded-full avatar-gradient text-white flex items-center justify-center text-[11px] font-semibold">
               AI
             </div>
@@ -102,7 +92,7 @@ export function ChatMessages({ messages, isLoading, containerRef }: ChatMessages
               </div>
               <span className="ml-2 text-xs text-muted-foreground">Thinking...</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
     </div>

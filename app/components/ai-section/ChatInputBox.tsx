@@ -5,7 +5,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 interface ChatInputBoxProps {
   onSendMessage: (message: string) => Promise<void>;
   isLoading: boolean;
-  textareaRef: React.RefObject<HTMLTextAreaElement> | null;
+  textareaRef?: React.RefObject<HTMLTextAreaElement | null>;
   placeholder?: string;
 }
 
@@ -40,7 +40,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
 
   // Auto-resize textarea
   useEffect(() => {
-    if (textareaRef.current) {
+    if (textareaRef?.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
@@ -48,7 +48,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
 
   // Focus textarea when it receives the ref
   useEffect(() => {
-    if (textareaRef.current && !isLoading) {
+    if (textareaRef?.current && !isLoading) {
       textareaRef.current.focus();
     }
   }, [textareaRef, isLoading]);

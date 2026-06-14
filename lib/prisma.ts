@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 // attempt to connect to an unauthenticated/placeholder database during
 // local development. You can override behavior with `USE_MOCK_DB=1`.
 const placeholderRegex = /\[?YOUR-?PASSWORD\]?/i;
-const databaseUrl = process.env.DATABASE_URL?.trim();
+const databaseUrl = process.env.DATABASE_URL?.trim() ?? '';
 const forceMock = process.env.USE_MOCK_DB === '1' || process.env.USE_MOCK_DB === 'true';
 
 const shouldUsePrisma = Boolean(databaseUrl) && !placeholderRegex.test(databaseUrl) && !forceMock;

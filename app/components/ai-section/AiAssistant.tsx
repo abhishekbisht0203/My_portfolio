@@ -8,7 +8,7 @@ import { ChatMessages } from './ChatMessages';
 import { ChatInputBox } from './ChatInputBox';
 import { Message } from '@prisma/client';
 
-export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, anchorRef?: React.RefObject<HTMLElement>, onClose?: () => void }) {
+export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, anchorRef?: React.RefObject<HTMLElement | null>, onClose?: () => void }) {
   const {
     selectedConversationId,
     messages,

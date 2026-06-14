@@ -92,7 +92,7 @@ export async function deleteConversationAction(id: string) {
   }
 }
 
-export async function getAIUsageStats() {
+export async function getAIUsageStats(): Promise<{ totalChats: number; totalMessages: number; modeStats: Array<{ mode: AIMode; count: number }> }> {
   try {
     // If Prisma isn't enabled (mock mode), avoid attempting to connect
     if (!isPrismaEnabled()) {
@@ -100,17 +100,17 @@ export async function getAIUsageStats() {
     }
     const totalChats = await prisma.userConversation.count();
     const totalMessages = await prisma.message.count();
-    
+
     // Aggregate by mode
     const messagesByMode = await prisma.message.groupBy({
       by: ['aiMode'],
       _count: true,
-    });
-    
+    }) as Array<{ aiMode: AIMode; _count: number }>;
+
     return {
       totalChats,
       totalMessages,
-      modeStats: messagesByMode.map((stat: any) => ({
+      modeStats: messagesByMode.map((stat) => ({
         mode: stat.aiMode,
         count: stat._count
       }))

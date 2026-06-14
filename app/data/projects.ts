@@ -74,8 +74,8 @@ export const projects: Project[] = [
     description: "A modern, animated portfolio built with Next.js, Tailwind CSS, and Framer Motion to highlight projects and skills with smooth UI/UX.",
     image: "/Port.jpg",
     tags: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
-    githubUrl: "#",
-    liveUrl: "https://carlos-portfolio-beta.vercel.app/"
+    githubUrl: "https://github.com/abhishekbisht0203/My_portfolio.git",
+    liveUrl: "https://abhishekbisht.vercel.app/"
   },
   {
     id: 7,

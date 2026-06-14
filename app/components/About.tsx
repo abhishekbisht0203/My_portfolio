@@ -7,7 +7,7 @@ import Image from 'next/image';
 const stats = [
   { icon: Award, label: 'Projects Completed', value: '20+' },
   { icon: Coffee, label: 'Energy Drinks Downed', value: '500+' },
-  { icon: Target, label: 'Years Coding', value: '5+' },
+  { icon: Target, label: 'Years Coding', value: '2+' },
 ];
 
 export default function About() {

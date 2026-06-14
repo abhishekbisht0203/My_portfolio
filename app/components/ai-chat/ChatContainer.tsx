@@ -120,15 +120,17 @@ export function ChatContainer() {
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-sm text-white/80">Web Search</span>
-            <button
-              onClick={() => setWebSearchEnabled(!webSearchEnabled)}
-              aria-label="Toggle web search"
-              aria-pressed={webSearchEnabled ? 'true' : 'false'}
-              title="Toggle web search"
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${webSearchEnabled ? 'bg-green-500' : 'bg-gray-400'}`}
-            >
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${webSearchEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
-            </button>
+            <label className="relative inline-flex cursor-pointer items-center">
+              <input
+                type="checkbox"
+                checked={webSearchEnabled}
+                onChange={(e) => setWebSearchEnabled(e.target.checked)}
+                aria-label="Toggle web search"
+                className="peer sr-only"
+              />
+              <span className="h-6 w-11 rounded-full bg-gray-400 transition-colors peer-checked:bg-green-500" />
+              <span className="pointer-events-none absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-5" />
+            </label>
           </div>
         </div>
 
