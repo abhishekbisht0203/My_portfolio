@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { OnlineIndicator } from './OnlineIndicator';
@@ -8,9 +8,10 @@ import { OnlineIndicator } from './OnlineIndicator';
 interface ChatHeaderProps {
   selectedConversationId: string | null;
   onNewChat: () => Promise<void>;
+  onClose?: () => void;
 }
 
-export function ChatHeader({ selectedConversationId, onNewChat }: ChatHeaderProps) {
+export function ChatHeader({ selectedConversationId, onNewChat, onClose }: ChatHeaderProps) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -85,9 +86,22 @@ export function ChatHeader({ selectedConversationId, onNewChat }: ChatHeaderProp
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
         </button>
+        {onClose && (
+          <button
+            onClick={onClose}
+            title="Close chat"
+            aria-label="Close chat"
+            className="p-2 rounded hover:bg-white/10 dark:hover:bg-slate-900/20 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
     </motion.div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useConversation } from '@/lib/ai/conversationHook';
 import { ChatHeader } from './ChatHeader';
@@ -8,9 +8,8 @@ import { ChatMessages } from './ChatMessages';
 import { ChatInputBox } from './ChatInputBox';
 import { Message } from '@prisma/client';
 
-export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, anchorRef?: React.RefObject<HTMLElement>, onClose?: () => void }) {
   const {
-    conversations,
     selectedConversationId,
     messages,
     isLoading,
@@ -21,7 +20,9 @@ export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   } = useConversation();
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [topOffset, setTopOffset] = useState<number | null>(null);
 
   // Initialize a new conversation when the component opens
   useEffect(() => {
@@ -47,8 +48,11 @@ export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
   // Scroll to bottom when messages update
   useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
     }
   }, [messages]);
 
@@ -74,6 +78,27 @@ export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     }
   }, [isOpen]);
 
+  // Compute overlay position so it doesn't overlap the hero buttons
+  useLayoutEffect(() => {
+    if (!isOpen || !anchorRef?.current) return;
+
+    try {
+      const anchor = anchorRef.current as HTMLElement;
+      const anchorRect = anchor.getBoundingClientRect();
+      // Find the nearest positioned ancestor (the hero section)
+      const container = anchor.closest('section') as HTMLElement | null;
+      const containerRect = container ? container.getBoundingClientRect() : null;
+
+      if (containerRect) {
+        // top offset relative to the container
+        const top = anchorRect.bottom - containerRect.top + 12; // 12px gap
+        setTopOffset(Math.round(top));
+      }
+    } catch (err) {
+      // ignore
+    }
+  }, [isOpen, anchorRef]);
+
   const handleSendMessage = async (content: string) => {
     if (!selectedConversationId) return;
     await sendMessage(content, 'PORTFOLIO', false); // Using PORTFOLIO mode, no web search
@@ -98,15 +123,16 @@ export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="w-full"
+          className="absolute left-1/2 transform -translate-x-1/2 z-50 w-[min(900px,92%)] pointer-events-auto"
+          style={{ top: topOffset !== null ? `${topOffset}px` : undefined, bottom: topOffset === null ? '7rem' : undefined }}
         >
           <div ref={chatContainerRef} className="relative">
             {/* Glassmorphism container */}
-            <div className="bg-white/20 dark:bg-slate-900/20 backdrop-blur-lg
+            <div className="flex h-[640px] max-h-[70vh] flex-col bg-white/20 dark:bg-slate-900/20 backdrop-blur-lg
                            border border-white/20 dark:border-slate-800/20
                            shadow-lg rounded-2xl overflow-hidden">
               <ChatHeader
@@ -115,11 +141,13 @@ export function AiAssistant({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                   const id = await createNewConversation('PORTFOLIO');
                   selectConversation(id);
                 }}
+                onClose={onClose}
               />
-              <div className="flex-1 overflow-hidden">
+              <div className="min-h-0 flex-1 overflow-hidden">
                 <ChatMessages
                   messages={messages}
                   isLoading={isLoading}
+                  containerRef={messagesContainerRef}
                 />
               </div>
               <ChatInputBox

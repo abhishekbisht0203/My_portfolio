@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Stack from './Stack'
@@ -39,6 +39,7 @@ export default function Hero() {
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
   const [particles, setParticles] = useState<ReturnType<typeof makeParticles>>([]);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setParticles(makeParticles());
@@ -145,7 +146,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-5 justify-center"
-          >
+            ref={buttonsRef}>
 
             <button
               onClick={() => scrollToSection('#projects')}
@@ -160,7 +161,7 @@ export default function Hero() {
               Get In Touch
             </button>
             <button
-              onClick={() => setIsAiSectionOpen(true)}
+              onClick={() => setIsAiSectionOpen(!isAiSectionOpen)}
               className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 transform hover:scale-105"
             >
               Chat with assistant
@@ -184,7 +185,9 @@ export default function Hero() {
           </button>
         </motion.div>
       </div>
-      <AiAssistant isOpen={isAiSectionOpen} onClose={() => setIsAiSectionOpen(false)} />
+      <AiAssistant isOpen={isAiSectionOpen} anchorRef={buttonsRef} onClose={() => setIsAiSectionOpen(false)} />
     </section>
   );
 }
+
+// add buttonsRef at top of component

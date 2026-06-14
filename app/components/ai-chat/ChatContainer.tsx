@@ -123,7 +123,7 @@ export function ChatContainer() {
             <button
               onClick={() => setWebSearchEnabled(!webSearchEnabled)}
               aria-label="Toggle web search"
-              aria-pressed={webSearchEnabled}
+              aria-pressed={webSearchEnabled ? 'true' : 'false'}
               title="Toggle web search"
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${webSearchEnabled ? 'bg-green-500' : 'bg-gray-400'}`}
             >

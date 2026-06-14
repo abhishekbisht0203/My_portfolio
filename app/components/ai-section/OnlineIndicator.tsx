@@ -1,34 +1,26 @@
 'use client';
 
-import { motion, useCycle } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export function OnlineIndicator() {
-  const [isPulsing, setIsPulsing] = useCycle(false, true);
-
-  // Start pulsing animation on mount
-  // Using useEffect to set up interval
-  // Actually, let's use CSS animation for simplicity
-
   return (
     <motion.span
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.9 }}
-      className="relative w-2 h-2"
+      className="relative inline-flex items-center"
     >
-      {/* Pulsing dot */}
-      <motion.circle
-        cx="1"
-        cy="1"
-        r="1"
-        className="bg-green-400"
-        animate={isPulsing ? { scale: [1, 1.3, 1] } : { scale: 1 }}
+      {/* Pulsing dot implemented with a span so it renders in HTML */}
+      <motion.span
+        className="block w-2 h-2 rounded-full bg-green-400"
+        animate={{ scale: [1, 1.4, 1] }}
         transition={{
           repeat: Infinity,
           repeatType: 'reverse',
-          duration: 2,
+          duration: 1.6,
           ease: 'easeInOut'
         }}
       />
+
       {/* Tooltip */}
       <motion.span
         initial={{ opacity: 0, y: -5 }}

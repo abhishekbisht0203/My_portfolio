@@ -1,10 +1,16 @@
 "use server";
 
-import { prisma } from '@/lib/prisma';
+import { prisma, isPrismaEnabled } from '@/lib/prisma';
 import { AIMode, Message, UserConversation, AIProvider } from '@prisma/client';
 import * as mockDb from '@/lib/ai/mockDb';
 
 export async function getConversations() {
+  // If no database URL is configured, use the in-memory mock DB to avoid
+  // noisy authentication errors during local development.
+  if (!isPrismaEnabled()) {
+    return mockDb.getConversations();
+  }
+
   try {
     return await prisma.userConversation.findMany({
       orderBy: { updatedAt: 'desc' },
@@ -17,6 +23,10 @@ export async function getConversations() {
 }
 
 export async function getConversation(id: string) {
+  if (!isPrismaEnabled()) {
+    return mockDb.getConversation(id);
+  }
+
   try {
     return await prisma.userConversation.findUnique({
       where: { id },
@@ -29,6 +39,10 @@ export async function getConversation(id: string) {
 }
 
 export async function createConversation(mode: AIMode = AIMode.GENERAL) {
+  if (!isPrismaEnabled()) {
+    return mockDb.createConversation(mode);
+  }
+
   try {
     return await prisma.userConversation.create({
       data: {
@@ -42,6 +56,10 @@ export async function createConversation(mode: AIMode = AIMode.GENERAL) {
 }
 
 export async function updateConversationTitleAction(id: string, title: string) {
+  if (!isPrismaEnabled()) {
+    return mockDb.updateConversationTitle(id, title);
+  }
+
   try {
     return await prisma.userConversation.update({
       where: { id },
@@ -54,6 +72,11 @@ export async function updateConversationTitleAction(id: string, title: string) {
 }
 
 export async function deleteConversationAction(id: string) {
+  if (!isPrismaEnabled()) {
+    await mockDb.deleteMessagesByConversation(id);
+    return mockDb.deleteConversation(id);
+  }
+
   try {
     await prisma.message.deleteMany({
       where: { conversationId: id }
@@ -71,8 +94,8 @@ export async function deleteConversationAction(id: string) {
 
 export async function getAIUsageStats() {
   try {
-    // If no database is configured (e.g. local dev without env), avoid attempting to connect
-    if (!process.env.DATABASE_URL) {
+    // If Prisma isn't enabled (mock mode), avoid attempting to connect
+    if (!isPrismaEnabled()) {
       return { totalChats: 0, totalMessages: 0, modeStats: [] };
     }
     const totalChats = await prisma.userConversation.count();

@@ -2,29 +2,40 @@ import { AIMode, Message, UserConversation } from '@prisma/client';
 
 type Conv = UserConversation & { messages: Message[] };
 
-// Simple in-memory mock DB for local dev when Prisma/database is unavailable
-const conversations: Conv[] = [
-  {
-    id: 'local-1',
-    title: 'Welcome to the demo chat',
-    userId: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isArchived: false,
-    messages: [
-      {
-        id: 'm-local-1',
-        conversationId: 'local-1',
-        role: 'assistant',
-        content: "Hi! This is a local demo chat. Ask me about the portfolio or say 'help' to get started.",
-        aiMode: 'GENERAL' as AIMode,
-        aiProvider: 'OPENAI' as any,
-        tokensUsed: 0,
-        createdAt: new Date(),
-      },
-    ],
-  },
-];
+const globalForMockDb = globalThis as typeof globalThis & {
+  __portfolio_mock_conversations__?: Conv[];
+};
+
+function createSeedConversations(): Conv[] {
+  return [
+    {
+      id: 'local-1',
+      title: 'Welcome to the demo chat',
+      userId: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      isArchived: false,
+      messages: [
+        {
+          id: 'm-local-1',
+          conversationId: 'local-1',
+          role: 'assistant',
+          content: "Hi! This is a local demo chat. Ask me about the portfolio or say 'help' to get started.",
+          aiMode: 'GENERAL' as AIMode,
+          aiProvider: 'OPENAI' as any,
+          tokensUsed: 0,
+          createdAt: new Date(),
+        },
+      ],
+    },
+  ];
+}
+
+// Store mock data on the global object so server actions and route handlers
+// can share the same state during local development.
+const conversations =
+  globalForMockDb.__portfolio_mock_conversations__ ??
+  (globalForMockDb.__portfolio_mock_conversations__ = createSeedConversations());
 
 export async function getConversations(): Promise<Conv[]> {
   // return clone to mimic DB behavior

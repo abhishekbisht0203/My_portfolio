@@ -1,44 +1,42 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Message } from '@prisma/client';
 import { Markdown } from '@/app/components/ai-chat/Markdown';
 
 interface ChatMessagesProps {
   messages: Message[];
   isLoading: boolean;
+  containerRef?: RefObject<HTMLDivElement | null>;
 }
 
-export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
+export function ChatMessages({ messages, isLoading, containerRef }: ChatMessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesListRef = useRef<HTMLDivElement>(null);
+  const localMessagesListRef = useRef<HTMLDivElement>(null);
+  const messagesListRef = containerRef ?? localMessagesListRef;
 
   // Scroll to bottom when messages update
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  // Animate list entrance
-  useEffect(() => {
-    if (messagesListRef.current) {
-      // Trigger reflow for animation
-      messagesListRef.current.style.opacity = '0';
-      void messagesListRef.current.offsetWidth; // Trigger reflow
-      messagesListRef.current.style.opacity = '1';
-    }
-  }, [messages.length]);
+    const container = messagesListRef.current;
+    if (!container) return;
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [messages, isLoading, messagesListRef]);
 
   return (
     <div
       ref={messagesListRef}
-      className="flex-1 overflow-y-auto p-5 space-y-4
+      className="h-full overflow-y-auto overscroll-contain p-5 pr-3 space-y-4
                  bg-white/10 dark:bg-slate-900/10 backdrop-blur"
     >
       {messages.map((message, index) => (
         <div
           key={message.id}
           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}
-                     max-w-[85%] opacity-0`}
+                     w-full`}
           style={{ animationDelay: `${index * 0.05}s` }}
         >
           <motion.div
@@ -58,9 +56,9 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                   You
                 </div>
               )}
-              <div className="flex flex-col">
+              <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
                 <div className={`${message.role === 'assistant' ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'bg-indigo-600 text-white'}
-                             rounded-lg px-4 py-3 max-w-[80%] break-words
+                             rounded-lg px-4 py-3 max-w-[min(42rem,80vw)] break-words
                              backdrop-blur-sm bg-white/20 dark:bg-slate-900/20
                              border border-white/20 dark:border-slate-800/20`}>
                   <Markdown content={message.content} />
@@ -73,6 +71,15 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
           </motion.div>
         </div>
       ))}
+
+      {!isLoading && messages.length === 0 && (
+        <div className="flex h-full min-h-[260px] items-center justify-center text-center text-sm text-muted-foreground">
+          <div>
+            <p className="font-medium text-foreground/80">Start the conversation</p>
+            <p className="mt-2">Ask about Abhishek&apos;s work, projects, or experience.</p>
+          </div>
+        </div>
+      )}
 
       {/* Loading indicator at the bottom when waiting for response */}
       {isLoading && messages.length > 0 && (

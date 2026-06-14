@@ -1,18 +1,16 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { useConversation } from '@/lib/ai/conversationHook';
+import React, { useState, useCallback, useEffect } from 'react';
 
 interface ChatInputBoxProps {
   onSendMessage: (message: string) => Promise<void>;
   isLoading: boolean;
-  textareaRef: React.RefObject<HTMLTextAreaElement>;
+  textareaRef: React.RefObject<HTMLTextAreaElement> | null;
   placeholder?: string;
 }
 
 export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholder = 'Ask about Abhishek...' }: ChatInputBoxProps) {
   const [inputValue, setInputValue] = useState('');
-  const { sendMessage: useSendMessage } = useConversation();
 
   const handleSubmit = useCallback(
     async (e?: React.FormEvent) => {
@@ -62,6 +60,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
       <div className="flex items-center space-x-3">
         {/* Attachment button (placeholder for future file upload) */}
         <button
+          type="button"
           onClick={() => {/* TODO: Implement file upload */}}
           className="p-2 rounded hover:bg-white/10 dark:hover:bg-slate-900/20 transition-colors"
           aria-label="Attach files"
@@ -95,9 +94,8 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
           className={`mt-2 px-5 py-3 rounded-lg
                    ${!inputValue.trim() || isLoading
                      ? 'bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:hover:bg-slate-900/20'
-                     : 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white
-                       hover:bg-gradient-to-r from-indigo-600 to-purple-600'
-                   } transition-all duration-200`}
+                     : 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:bg-gradient-to-r from-indigo-600 to-purple-600'}
+                   transition-all duration-200`}
         >
           {isLoading ? (
             <>
@@ -120,6 +118,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
       {!inputValue && !isLoading && (
         <div className="mt-4 flex flex-wrap gap-3">
           <button
+            type="button"
             onClick={() => setInputValue('Tell me about Abhishek')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:hover:bg-slate-900/20
@@ -129,6 +128,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             About me
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('What projects has Abhishek built?')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:hover:bg-slate-900/20
@@ -138,6 +138,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             Projects
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('What technologies does Abhishek use?')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:hover:bg-slate-900/20
@@ -147,6 +148,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             Technologies
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('Can Abhishek help with full stack development?')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:hover:bg-slate-900/20
@@ -156,6 +158,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             Full Stack
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('Show experience')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:bg-slate-900/20
@@ -165,6 +168,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             Experience
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('Show skills')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:bg-slate-900/20
@@ -174,6 +178,7 @@ export function ChatInputBox({ onSendMessage, isLoading, textareaRef, placeholde
             Skills
           </button>
           <button
+            type="button"
             onClick={() => setInputValue('Contact Abhishek')}
             className="px-4 py-2 rounded-lg text-sm font-medium
                      bg-white/10 dark:bg-slate-900/10 hover:bg-white/20 dark:bg-slate-900/20

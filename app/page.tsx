@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Resume from './components/Resume';
 import AppointmentSection from './components/appointments/AppointmentSection';
 import Contact from './components/Contact';
+import { AiAssistant } from '@/app/components/ai-section/AiAssistant';
 
 export default function Home() {
   return (
