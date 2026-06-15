@@ -12,7 +12,7 @@ export const appointmentSchema = z.object({
     'Consultation Call',
     'Other'
   ], {
-    error: 'Please select a meeting type'
+    message: 'Please select a meeting type'
   }),
   date: z.string().min(1, 'Please select a date'),
   time: z.string().min(1, 'Please select a time'),
