@@ -24,6 +24,11 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [topOffset, setTopOffset] = useState<number | null>(null);
   const [maxHeight, setMaxHeight] = useState<string>('900px');
+  const [hasOpened, setHasOpened] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) setHasOpened(true);
+  }, [isOpen]);
 
   // Initialize a new conversation when the component opens
   useEffect(() => {
@@ -102,6 +107,13 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
     await sendMessage(content, 'PORTFOLIO', false); // Using PORTFOLIO mode, no web search
   };
 
+  const closeChat = () => {
+    setHasOpened(false);
+    onClose?.();
+  };
+
+  const shouldRender = isOpen || hasOpened;
+
   if (error) {
     return (
       <div className="p-6 text-center text-muted-foreground">
@@ -119,7 +131,7 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {shouldRender && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,7 +152,7 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
                   const id = await createNewConversation('PORTFOLIO');
                   selectConversation(id);
                 }}
-                onClose={onClose}
+                onClose={closeChat}
               />
               <div className="min-h-0 flex-1">
                 <ChatMessages
