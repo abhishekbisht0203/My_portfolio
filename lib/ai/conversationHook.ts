@@ -12,7 +12,13 @@ import {
 
 export function useConversation() {
   const [conversations, setConversations] = useState<(UserConversation & { messages: Message[] })[]>([]);
-  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(() => {
+  // Try to restore the last opened conversation from localStorage.
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem('selectedConversationId');
+  }
+  return null;
+});
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -35,10 +41,16 @@ export function useConversation() {
     try {
       const convs = await getConversations();
       setConversations(convs);
+      // Auto‑select the first conversation if none is currently selected.
+      // This prevents the UI from briefly showing an empty chat while the
+      // client hydrates on a fresh deploy.
+      if (!selectedConversationId && convs.length > 0) {
+        setSelectedConversationId(convs[0].id);
+      }
     } catch (err) {
       setError(err as Error);
     }
-  }, []);
+  }, [selectedConversationId]);
 
   const loadMessages = useCallback(async (conversationId: string) => {
     try {
@@ -67,6 +79,9 @@ export function useConversation() {
 
   const selectConversation = useCallback((conversationId: string) => {
     setSelectedConversationId(conversationId);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('selectedConversationId', conversationId);
+    }
   }, []);
 
   const updateConversationTitle = useCallback(async (conversationId: string, title: string) => {
@@ -206,16 +221,9 @@ export function useConversation() {
       throw err;
     } finally {
       setIsLoading(false);
-      // Reload actual messages to get real IDs and sync state
-      // Only do this if we don't have an error (to avoid overwriting error state)
-      if (!error) {
-        try {
-          await loadMessages(selectedConversationId);
-        } catch (reloadError) {
-          console.warn('Failed to reload messages after send:', reloadError);
-          // Don't set error here as it might overwrite a more meaningful send error
-        }
-      }
+      // NOTE: Skipping automatic reload of messages after send.
+      // The optimistic update already reflects the latest assistant response.
+      // Reloading could briefly clear the UI on a fresh deployment.
     }
   }, [selectedConversationId, conversations, updateConversationTitle, loadMessages, error]);
 
