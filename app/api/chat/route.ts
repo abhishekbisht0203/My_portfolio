@@ -29,6 +29,27 @@ export async function POST(req: NextRequest) {
     }
 
     if (!conversation) {
+      // On Vercel, server actions and route handlers can run in different
+      // isolated instances. Recreate the selected conversation in this route
+      // instance instead of failing the chat request.
+      if (!isPrismaEnabled()) {
+        conversation = await mockDb.createConversation(aiMode as any, conversationId);
+      } else {
+        try {
+          await prisma.userConversation.create({
+            data: {
+              id: conversationId,
+              title: 'New Chat',
+            },
+          });
+          conversation = await prisma.userConversation.findUnique({ where: { id: conversationId } });
+        } catch (err) {
+          conversation = await mockDb.createConversation(aiMode as any, conversationId);
+        }
+      }
+    }
+
+    if (!conversation) {
       return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });
     }
 

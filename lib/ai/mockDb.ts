@@ -49,8 +49,7 @@ export async function getConversation(id: string): Promise<Conv | null> {
   return c ? JSON.parse(JSON.stringify(c)) : null;
 }
 
-export async function createConversation(mode: AIMode = 'GENERAL'): Promise<Conv> {
-  const id = `local-${Date.now()}`;
+export async function createConversation(mode: AIMode = 'GENERAL', id = `local-${Date.now()}`): Promise<Conv> {
   const conv: Conv = {
     id,
     title: 'New Chat',
