@@ -23,6 +23,7 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [topOffset, setTopOffset] = useState<number | null>(null);
+  const [maxHeight, setMaxHeight] = useState<string>('900px');
 
   // Initialize a new conversation when the component opens
   useEffect(() => {
@@ -82,9 +83,14 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
       const containerRect = container ? container.getBoundingClientRect() : null;
 
       if (containerRect) {
-        // top offset relative to the container
-        const top = anchorRect.bottom - containerRect.top + 12; // 12px gap
+        // Keep the chat visible within the viewport, even when the page is scrolled
+        const desiredTop = anchorRect.bottom - containerRect.top + 12; // 12px gap
+        const targetHeight = Math.min(900, Math.max(560, window.innerHeight - 96));
+        const minTop = 48;
+        const maxTop = Math.max(minTop, window.innerHeight - targetHeight - 48);
+        const top = Math.max(minTop, Math.min(desiredTop, maxTop));
         setTopOffset(Math.round(top));
+        setMaxHeight(`${targetHeight}px`);
       }
     } catch (err) {
       // ignore
@@ -119,14 +125,15 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="absolute left-1/2 transform -translate-x-1/2 z-50 w-[min(900px,92%)] pointer-events-auto"
-          style={{ top: topOffset !== null ? `${topOffset}px` : undefined, bottom: topOffset === null ? '7rem' : undefined }}
+          className="fixed left-1/2 transform -translate-x-1/2 z-[9999] w-[min(1100px,96%)] pointer-events-auto"
+          style={{ top: topOffset !== null ? `${topOffset}px` : '50%' }}
         >
           <div ref={chatContainerRef} className="relative">
             {/* Glassmorphism container */}
-            <div className="flex h-[640px] max-h-[70vh] flex-col bg-white/20 dark:bg-slate-900/20 backdrop-blur-lg
+            <div className="flex flex-col bg-white/20 dark:bg-slate-900/20 backdrop-blur-lg
                            border border-white/20 dark:border-slate-800/20
-                           shadow-lg rounded-2xl overflow-hidden">
+                           shadow-lg rounded-2xl"
+                 style={{ height: maxHeight, maxHeight, overflowY: 'auto' }}>
               <ChatHeader
                 selectedConversationId={selectedConversationId}
                 onNewChat={async () => {
@@ -135,7 +142,7 @@ export function AiAssistant({ isOpen, anchorRef, onClose }: { isOpen: boolean, a
                 }}
                 onClose={onClose}
               />
-              <div className="min-h-0 flex-1 overflow-hidden">
+              <div className="min-h-0 flex-1">
                 <ChatMessages
                   messages={messages}
                   isLoading={isLoading}
