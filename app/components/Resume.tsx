@@ -1,23 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Download, Eye, FileText, ExternalLink } from 'lucide-react';
-import { useState } from 'react';
+import { Download, FileText, ExternalLink } from 'lucide-react';
 
 export default function Resume() {
-  const [isViewing, setIsViewing] = useState(true);
-
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/resume/ABHISHEK_BISHT .pdf';
+    link.href = '/resume/Abhishek_Bisht.pdf';
     link.download = 'Abhishek_Bisht_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
-
-  const handleView = () => {
-    setIsViewing(!isViewing);
   };
 
   return (
@@ -61,15 +54,7 @@ export default function Resume() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={handleView}
-                  className="flex items-center justify-center px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all duration-200 transform hover:scale-105"
-                >
-                  <Eye className="w-5 h-5 mr-2" />
-                  {isViewing ? 'Hide' : 'View'} Resume
-                </button>
-                
-                <button
+<button
                   onClick={handleDownload}
                   className="flex items-center justify-center px-6 py-3 border-2 border-orange-500 text-orange-500 dark:border-amber-400 dark:text-amber-400 rounded-lg font-semibold hover:bg-orange-500 hover:text-white dark:hover:bg-amber-400 dark:hover:text-white transition-all duration-200 transform hover:scale-105"
                 >
@@ -78,7 +63,7 @@ export default function Resume() {
                 </button>
                 
                 <a
-                  href="/resume/ABHISHEK_BISHT .pdf"
+                  href="/resume/Abhishek_Bisht.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center px-6 py-3 bg-stone-700 text-white rounded-lg font-semibold hover:bg-stone-600 transition-all duration-200 transform hover:scale-105"
@@ -91,32 +76,20 @@ export default function Resume() {
           </div>
 
           {/* Resume Viewer */}
-          {isViewing && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-stone-800 rounded-xl shadow-lg overflow-hidden"
-            >
-              <div className="p-4 bg-gray-100 dark:bg-stone-700 border-b">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Resume Preview
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Click -Download PDF- for the full version
-                </p>
-              </div>
-              
-              <div className="relative w-full h-[800px]">
-                <iframe
-                  src="/resume/ABHISHEK_BISHT .pdf"
-                  className="w-full h-full border-0"
-                  title="Resume Preview"
-                />
-              </div>
-            </motion.div>
-          )}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white dark:bg-stone-800 rounded-xl shadow-lg overflow-hidden"
+          >
+            <div className="relative w-full h-screen">
+              <iframe
+                src="/resume/Abhishek_Bisht.pdf"
+                className="w-full h-full border-0"
+                title="Resume Preview"
+              />
+            </div>
+          </motion.div>
 
           
         </motion.div>

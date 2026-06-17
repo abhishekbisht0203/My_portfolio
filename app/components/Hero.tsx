@@ -70,7 +70,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative">
+    <section id="home" className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
       {/* Inner container clips background effects but lets the chat dropdown overflow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="aurora-bg absolute inset-0" />
@@ -109,7 +109,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
 
-          <div className="flex justify-center mb-8 -mt-8 sm:-mt-16">
+          <div className="flex justify-center mb-8 mt-4 sm:-mt-16">
             <Stack
               randomRotation={false}
               sensitivity={180}

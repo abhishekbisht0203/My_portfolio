@@ -8,37 +8,37 @@ const skills = [
     category: 'Frontend',
     icon: Code,
     color: 'from-orange-500 to-amber-400',
-    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML', 'CSS', 'JavaScript']
+    technologies: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML', 'CSS', 'JavaScript']
   },
   {
     category: 'Backend',
     icon: Database,
     color: 'from-amber-600 to-orange-500',
-    technologies: ['Node.js', 'Express.js', 'Django REST Framework', 'FastAPI', 'REST APIs']
+    technologies: ['Node.js', 'Express.js', 'Django REST Framework', 'FastAPI']
   },
   {
-    category: 'Databases',
+    category: 'Database',
     icon: CircuitBoard,
     color: 'from-amber-500 to-orange-400',
     technologies: ['MongoDB', 'PostgreSQL']
   },
   {
-    category: 'Tools & Tech',
+    category: 'Tools & Technologies',
     icon: GitBranch,
     color: 'from-orange-400 to-amber-500',
     technologies: ['Git', 'WebSockets', 'Razorpay', 'Cloudinary', 'CI/CD', 'REST APIs']
+  },
+  {
+    category: 'AI & Automation',
+    icon: MicVocal,
+    color: 'from-amber-500 to-orange-600',
+    technologies: ['LLMs', 'MCP (Model Context Protocol)', 'Prompt Engineering', 'AI Agents', 'OpenRouter', 'Claude API', 'Anthropic API', 'RAG Fundamentals', 'AI Workflow Automation']
   },
   {
     category: 'Core Concepts',
     icon: Brain,
     color: 'from-orange-600 to-amber-500',
     technologies: ['Authentication', 'Role-Based Access Control', 'API Optimization', 'System Design']
-  },
-  {
-    category: 'Soft Skills',
-    icon: MicVocal,
-    color: 'from-amber-500 to-orange-600',
-    technologies: ['Collaboration', 'Problem Solving', 'Communication', 'Product Thinking']
   }
 ];
 

@@ -76,7 +76,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 pt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-6">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
